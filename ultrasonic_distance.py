@@ -14,12 +14,12 @@ def pin_setup():
     GPIO.output(led_pin, GPIO.LOW)
 
 def get_distance():
+    start_time = 0
+    end_time = 0
+    
     GPIO.output(trigger_pin, GPIO.HIGH)
     time.sleep(0.00001)
     GPIO.output(trigger_pin, GPIO.LOW)
-
-    start_time = 0
-    end_time = 0
 
     while GPIO.input(echo_pin) == 0:
         start_time = time.time()
@@ -43,7 +43,7 @@ try:
 
         pwm_led.ChangeDutyCycle(distance / 4)
 
-        time.sleep(0.5)
+        time.sleep(1)
 except KeyboardInterrupt:
     pwm_led.stop()
     GPIO.cleanup()
